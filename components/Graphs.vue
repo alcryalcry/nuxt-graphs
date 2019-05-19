@@ -31,6 +31,9 @@
           @clickAction="goToPrevStep"
         >Previous step
         </app-button>
+        <nuxt-link
+          style="color: #fff; font-size: 2rem"
+          to="/">GRAPHS</nuxt-link>
       </div>
     </div>
   </div>

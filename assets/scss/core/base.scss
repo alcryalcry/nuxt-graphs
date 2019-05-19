@@ -2,7 +2,7 @@ html {
   display: block !important;
   height: 100%;
   color: $black;
-  background: $white;
+  background: $darkBlue;
   font-family: $fontBase;
   font-size: 10px;
   line-height: 1.4;
@@ -130,14 +130,6 @@ a {
     pointer-events: none;
     transition: opacity .3s $easeOutCubic;
   }
-
-  .isSidebarOpen & {
-    pointer-events: none;
-
-    &::before {
-      opacity: 0.5;
-    }
-  }
 }
 
 
@@ -234,8 +226,4 @@ $gridColor: #b9b9b9;
     margin-top: 16rem;
     height: 50rem;
   }
-}
-
-.isDark {
-  background: $darkBlue;
 }

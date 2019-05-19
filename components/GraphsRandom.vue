@@ -32,7 +32,10 @@
           @clickAction="goToPrevStep"
         >Previous step</app-button
         >
-        <!-- https://www.youtube.com/watch?v=U33dsEcKgeQ
+        <nuxt-link
+          style="color: #fff; font-size: 2rem"
+          to="/graphs">GRAPHS STATIC</nuxt-link>
+          <!-- https://www.youtube.com/watch?v=U33dsEcKgeQ
         <h2>GraphsGenus:</h2>
         <code>lines - circles + 1</code>
         <h2>true:</h2>

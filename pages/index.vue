@@ -1,19 +1,33 @@
 <template>
   <div>
-    <section class="section">
+    <section>
       <div class="container">
-        <app-notes />
+        <transition 
+          name="fade" 
+          mode="out-in">
+          <app-graphs-random
+            :key="currentKey"
+            @reloadComponent="currentKey++"
+          />
+        </transition>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import AppNotes from '~/components/Notes.vue'
+import AppGraphsRandom from '~/components/GraphsRandom.vue';
 
 export default {
-	components: {
-		AppNotes
-	}
-}
+  name: 'PageGraphsRandom',
+  layout: 'dark',
+  components: {
+    AppGraphsRandom
+  },
+  data() {
+    return {
+      currentKey: 0
+    };
+  },
+};
 </script>

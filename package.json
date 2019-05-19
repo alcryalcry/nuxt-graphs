@@ -1,9 +1,11 @@
 {
-  "name": "vue-nuxt",
-  "version": "1.0.0",
-  "description": "Nuxt.js project",
-  "author": "",
-  "private": true,
+  "name": "nuxt-graphs",
+  "version": "0.0.2",
+  "author": "Alexander Shiryakov (alcryalcry@gmail.com)",
+  "contributors": [
+    "Alexander Shiryakov (alcryalcry@gmail.com)"
+  ],
+  "description": "Graphs game based on Nuxt.js",
   "scripts": {
     "dev": "nuxt",
     "start": "nuxt start",
