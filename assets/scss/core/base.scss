@@ -1,0 +1,241 @@
+html {
+  display: block !important;
+  height: 100%;
+  color: $black;
+  background: $white;
+  font-family: $fontBase;
+  font-size: 10px;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+
+  // fluid font
+  // font-size: calc( Fmin + (Fmax - Fmin) * (100vw - Vmin)/(Vmax - Vmin) );
+  @include mq(1024, 1279) {
+    font-size: calc(8.5px + 1.5 * (100vw - 1024px) / 255);
+  }
+  
+  @include mq(768, 1023) {
+    font-size: calc(10px + 6 * (100vw - 768px) / 255);
+  }
+  
+  @include mq(767) {
+    font-size: calc(10px + 13 * (100vw - 320px) / 447);
+  }
+
+  // popup bugfix in iOS
+  &.isScrollLocked {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    //overflow: hidden;
+  }
+}
+
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  height: 100%;
+  font-size: 1.6rem;
+
+  #__nuxt {
+    height: 100%;
+  }
+  #__layout {
+    height: 100%;
+
+    > * {
+      height: 100%;
+    }
+  }
+
+  &.isScrollLocked {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+  }
+}
+
+.section {
+  &--black {
+    background: $black;
+  }
+
+  &--gray {
+    background: $gray;
+  }
+  
+  &--lightgray {
+    background: $lightgray;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8rem 0;
+
+  @include mq(1279) {
+    margin: 0 115px;
+  }
+
+  @include mq(1023) {
+    margin: 0 85px;
+    padding: 6rem 0;
+  }
+  
+  @include mq(767) {
+    margin: 0 20px;
+    padding: 4rem 2rem;
+  }
+}
+
+a {
+  color: $black;
+  text-decoration: none;
+}
+
+.title {
+  margin: 0 0 4rem;
+  font-size: 4rem;
+  color: $gray;
+}
+
+.page-enter-active, .page-leave-active {
+  transition: opacity $trans;
+}
+
+.page-enter, .page-leave-active {
+  opacity: 0
+}
+
+.page-content {
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $gray;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s $easeOutCubic;
+  }
+
+  .isSidebarOpen & {
+    pointer-events: none;
+
+    &::before {
+      opacity: 0.5;
+    }
+  }
+}
+
+
+
+
+// graphs пока будут здесь, чтобы не менять по два раза
+$gridColor: #b9b9b9;
+
+.fade-enter-active {
+  transition: opacity .1s, transform $trans;
+}
+.fade-leave-active {
+  transition: opacity .1s;
+}
+.fade-enter {
+  opacity: 0;
+  transform: translateY(1rem);
+}
+.fade-leave-to {
+  opacity: 0;
+}
+
+.graphs {
+  &__game {
+    display: flex;
+    justify-content: space-between;
+
+    &.isComplete {
+      .graphs__result {
+        opacity: 1;
+        pointer-events: auto;
+        background: rgba($darkBlue, .9);
+      }
+      .canvas {
+        // opacity: .25;
+        pointer-events: none;
+      }
+    }
+  }
+
+  &__canvas-container {
+    position: relative;
+    font-size: 0;
+  }
+
+  &__result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 4rem;
+    font-size: 5rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $trans;
+    z-index: 1;
+
+    .title {
+      color: $darkBlueText;
+    }
+  }
+  
+  .canvas {
+    background: $darkBlue;
+    border: .5rem solid $gray;
+    border-radius: .5rem;
+    transition: opacity $trans;
+  }
+
+  &__info {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-end;
+
+    .button {
+      margin-bottom: 2rem;
+      opacity: 0;
+      pointer-events: none;
+
+      &.isShown {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    }
+  }
+
+  &__video {
+    margin-top: 16rem;
+    height: 50rem;
+  }
+}
+
+.isDark {
+  background: $darkBlue;
+}
