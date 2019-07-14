@@ -11,7 +11,8 @@
     "start": "nuxt start",
     "build": "nuxt build",
     "generate": "nuxt generate",
-    "now-build": "cd dist/"
+    "now-build": "cd dist/",
+    "api": "cd mockapi && npm run devapi"
   },
   "dependencies": {
     "body-scroll-lock": "^2.6.1",
