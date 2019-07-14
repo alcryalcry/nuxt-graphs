@@ -1,11 +1,9 @@
-# dependencies
+[Rr]elease/
+[Rr]eleases/
+[Bb]uild/
+[Dd]ist/
 node_modules
-
-# logs
 npm-debug.log
-
-# Nuxt build
+report.html
 .nuxt
-
-# Nuxt generate
-dist
+package-lock.json
