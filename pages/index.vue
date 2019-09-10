@@ -2,9 +2,10 @@
   <div>
     <section>
       <div class="container">
-        <transition 
-          name="fade" 
-          mode="out-in">
+        <transition
+          name="fade"
+          mode="out-in"
+        >
           <app-graphs-random
             :key="currentKey"
             @reloadComponent="currentKey++"
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import AppGraphsRandom from '~/components/GraphsRandom.vue';
+import AppGraphsRandom from '~/components/GraphsRandom.vue'
 
 export default {
   name: 'PageGraphsRandom',
@@ -27,7 +28,7 @@ export default {
   data() {
     return {
       currentKey: 0
-    };
-  },
-};
+    }
+  }
+}
 </script>

@@ -2,12 +2,14 @@
   <div>
     <section>
       <div class="container">
-        <transition 
-          name="fade" 
-          mode="out-in">
-          <app-graphs 
-            :key="currentKey" 
-            @reloadComponent="currentKey++" />
+        <transition
+          name="fade"
+          mode="out-in"
+        >
+          <app-graphs
+            :key="currentKey"
+            @reloadComponent="currentKey++"
+          />
         </transition>
       </div>
     </section>
@@ -15,7 +17,7 @@
 </template>
 
 <script>
-import AppGraphs from '~/components/Graphs.vue';
+import AppGraphs from '~/components/Graphs.vue'
 
 export default {
   name: 'PageGraphs',
@@ -25,7 +27,7 @@ export default {
   data() {
     return {
       currentKey: 0
-    };
+    }
   }
-};
+}
 </script>

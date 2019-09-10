@@ -1,10 +1,9 @@
-<template>
-  <button 
-    :type="type" 
-    class="button" 
-    @click="$emit('clickAction')">
-    <slot>Button</slot>
-  </button>
+<template lang="pug">
+  button.button(
+    :type="type"
+    @click="$emit('clickAction')"
+  )
+    slot Button
 </template>
 
 <script>
@@ -17,9 +16,9 @@ export default {
     }
   },
   data() {
-    return {};
+    return {}
   }
-};
+}
 </script>
 
 <style lang="scss">
@@ -35,7 +34,7 @@ export default {
   background: $darkBlueText;
   text-transform: uppercase;
   cursor: pointer;
-  transition: $trans;
+  transition: $t;
 
   &:active {
     border-color: darken($darkBlueText, 10%);
@@ -49,7 +48,7 @@ export default {
     border-color: $darkBlueText;
   }
 
-  @include mq(1024, 9999) {
+  @include desktop {
     &:hover {
       border-color: darken($darkBlueText, 10%);
       background-color: darken($darkBlueText, 10%);

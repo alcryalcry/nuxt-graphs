@@ -1,9 +1,5 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+export const state = () => ({
+})
 
-Vue.use(Vuex);
-
-const store = () => new Vuex.Store({
-});
-
-export default store;
+export const getters = () => ({
+})
