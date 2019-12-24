@@ -33,13 +33,14 @@
 
 <script>
 import AppButton from '~/components/Button.vue'
-import { drawLine, drawCircle, drawText, showGrid } from '~/plugins/drawTools'
+import { drawTools } from '~/mixins/drawTools'
 
 export default {
   name: 'Graphs',
   components: {
     AppButton
   },
+  mixins: [drawTools],
   data() {
     return {
       step: 0,
@@ -84,7 +85,7 @@ export default {
     this.generateGraph()
     this.prevCircles = this.circles.map(a => ({ ...a }))
     this.generateCoords()
-    showGrid(this.ctx, this.grid, this.rowHeight, this.colWidth)
+    this.showGrid()
     this.generateAdj(true)
     this.generateValues()
     this.drawAll()
@@ -120,7 +121,7 @@ export default {
           item.value -= item.relation.length
 
           this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-          showGrid(this.ctx, this.grid, this.rowHeight, this.colWidth)
+          this.showGrid()
 
           this.requestIdList.forEach((item, i) => {
             cancelAnimationFrame(item)
@@ -168,12 +169,7 @@ export default {
             startCircleI !== startCircleIndex &&
             endCircleI !== endCircleIndex
           ) {
-            drawLine(
-              this.ctx,
-              this.circles[startCircleI],
-              this.circles[endCircleI],
-              this
-            )
+            this.drawLine(this.circles[startCircleI], this.circles[endCircleI])
           }
         })
       })
@@ -253,8 +249,8 @@ export default {
 
     drawAll() {
       this.circles.forEach((item) => {
-        drawCircle(this.ctx, this.colWidth, item)
-        drawText(this.ctx, this.colWidth, item)
+        this.drawCircle(item)
+        this.drawText(item)
       })
     },
 
@@ -361,12 +357,7 @@ export default {
         circleAdj.forEach((adj, endCircleIndex) => {
           if (adj) {
             this.circles[startCircleIndex].relation.push(endCircleIndex)
-            drawLine(
-              this.ctx,
-              this.circles[startCircleIndex],
-              this.circles[endCircleIndex],
-              this
-            )
+            this.drawLine(this.circles[startCircleIndex], this.circles[endCircleIndex])
           }
         })
       })
