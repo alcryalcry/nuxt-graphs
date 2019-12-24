@@ -41,35 +41,26 @@ export default {
     AppButton
   },
   mixins: [drawTools],
-  data() {
-    return {
-      step: 0,
-      isComplete: false,
-      requestIdList: [],
-      grid: {
-        rows: 0,
-        cols: 0
-      },
-      adjacency: [],
-      circles: [],
-      prevCircles: [],
-      linesCount: 0,
-      settings: {
-        coefRelation: 0.9, // 0 - max (all circles has relations with all circles), 1 - only one relation for every circles
-        circlesCount: 5,
-        minGrid: 10,
-        maxGrid: 10
-      }
+  data: () => ({
+    step: 0,
+    isComplete: false,
+    requestIdList: [],
+    grid: {
+      rows: 0,
+      cols: 0
+    },
+    adjacency: [],
+    circles: [],
+    prevCircles: [],
+    linesCount: 0,
+    settings: {
+      coefRelation: 0.9, // 0 - max (all circles has relations with all circles), 1 - only one relation for every circles
+      circlesCount: 5,
+      minGrid: 10,
+      maxGrid: 10
     }
-  },
-
+  }),
   computed: {
-    canvas() {
-      return this.$refs.canvas
-    },
-    ctx() {
-      return this.canvas.getContext('2d')
-    },
     colWidth() {
       return +this.canvas.getAttribute('width') / this.grid.cols
     },
@@ -82,13 +73,17 @@ export default {
   },
 
   mounted() {
-    this.generateGraph()
-    this.prevCircles = this.circles.map(a => ({ ...a }))
-    this.generateCoords()
-    this.showGrid()
-    this.generateAdj(true)
-    this.generateValues()
-    this.drawAll()
+    if (process.browser) {
+      this.canvas = this.$refs.canvas
+      this.ctx = this.canvas.getContext('2d')
+      this.generateGraph()
+      this.prevCircles = this.circles.map(a => ({ ...a }))
+      this.generateCoords()
+      this.showGrid()
+      this.generateAdj(true)
+      this.generateValues()
+      this.drawAll()
+    }
   },
 
   methods: {
@@ -140,9 +135,7 @@ export default {
         }
       })
 
-      if (this.circles.every(item => item.value >= 0)) {
-        this.isComplete = true
-      }
+      this.isComplete = this.circles.every(item => item.value >= 0)
     },
 
     drawAllAnimate(startCircleIndex, endCircleIndex) {
@@ -267,11 +260,7 @@ export default {
         }
 
         let value = 0
-        if (i % 2 !== 0) {
-          value = this.random(minValue, 0)
-        } else {
-          value = this.random(0, maxValue)
-        }
+        value = i % 2 !== 0 ? this.random(minValue, 0) : this.random(0, maxValue)
         circle.value = value
         values -= value
       })
